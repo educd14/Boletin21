@@ -40,16 +40,18 @@ public class Libreria {
     }
 
     public void baixa(int unidades, ArrayList<Libros> lista) throws Erros {
+        ArrayList<Integer> auxIndex = new ArrayList();
         if (lista.isEmpty() == true) {
             throw new Erros("O Array está vacío");
         } else {
-            Libros lib = new Libros();
-            Iterator it = lista.iterator();
-            while (it.hasNext()) {
-                lib = (Libros) it.next();
-                if (unidades == lib.getUnidades()) {
-                    lista.remove(lib);
+            Libros lib;
+            for (int i = 0; i < lista.size(); i++) {
+                if (lista.get(i).getUnidades() == unidades) {
+                    auxIndex.add(i);
                 }
+            }
+            for (int i = auxIndex.size() - 1; i >= 0; i--) {
+                lista.remove(lista.get(auxIndex.get(i)));
             }
         }
     }
